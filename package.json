@@ -1,0 +1,22 @@
+{
+  "name": "keycloak-configurator",
+  "version": "0.0.1",
+  "description": "Helps to configure locally running keycloak - not production",
+  "main": "index.js",
+  "author": "kemalk89",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": ""
+  },
+  "bin": {
+    "keycloak-configurator": "./index.js"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {
+    "@keycloak/keycloak-admin-client": "^18.0.0",
+    "prompt": "^1.3.0"
+  }
+}
