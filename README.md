@@ -11,14 +11,10 @@ Do not use this tool on production environments. Only for local running keycloak
 
 # Usage
 With docker you can spin up a keycloak server in no time. See the following command:
-```docker run -p 8080:8080 -e KEYCLOAK_ADMIN=admin -e KEYCLOAK_ADMIN_PASSWORD=admin quay.io/keycloak/keycloak:18.0.2 start-dev```
+```docker run -d --name some-keycloak -p 8080:8080 -e KEYCLOAK_ADMIN=admin -e KEYCLOAK_ADMIN_PASSWORD=admin quay.io/keycloak/keycloak:18.0.2 start-dev```
 <br/>
 <br/>
-Than you can run this tool with the following command:
-```npx keycloak-configurator --config config.json```
-<br/>
-<br/>
-Here is an example config.json file:
+Than you can create a ``config.json``. Here is an example:
 
 ````
 {
@@ -54,6 +50,11 @@ Here is an example config.json file:
   "roles": [{ "name": "USER" }, { "name": "ADMIN" }]
 }
 ````
+<br/>
+<br/>
+Finally you can run this tool with the following command:
+
+`npx keycloak-configurator --config config.json`
 
 # FAQ
 ## Keycloak has already en export feature. Why do I need this tool?
