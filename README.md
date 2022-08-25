@@ -58,7 +58,7 @@ Finally you can run this tool with the following command:
 
 > You can also run only ```npx keycloak-configurator``` without the config parameter. Than it will take the config.json depicted above as default.
 
-> To use the defaults but specify only the baseUrl run ```npx keycloak-configurator connectionConfig:baseUrl http://localhost:8084/```
+> To use the defaults but specify only the baseUrl run ```npx keycloak-configurator --connectionConfig:baseUrl http://localhost:8084/```
 
 # FAQ
 ## Keycloak has already an export feature. Why do I need this tool?
