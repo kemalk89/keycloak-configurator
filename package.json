@@ -7,7 +7,7 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": ""
+    "url": "https://github.com/kemalk89/keycloak-configurator"
   },
   "bin": {
     "keycloak-configurator": "./index.js"
