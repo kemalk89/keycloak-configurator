@@ -2,46 +2,11 @@
 
 const KcAdminClient = require('@keycloak/keycloak-admin-client');
 const prompt = require("prompt");
-const fs = require("fs");
-const defaultConfig = require("./default-config.json");
+const initConfig = require('./init-config');
 
 const [, , ...args] = process.argv;
 
-function getOptionValue(name) {
-    const OPTION_PREFIX = '--';
-
-    const optionIndex = args.indexOf(OPTION_PREFIX + name);
-    if (optionIndex === -1) {
-        return null;
-    }
-
-
-    const optionValue = args[optionIndex + 1];
-    if (!optionValue) {
-        return null;
-    }
-
-    if (optionValue.startsWith(OPTION_PREFIX)) {
-        return null;
-    }
-
-    return optionValue;
-}
-
-let confJSON = null;
-const configFilePath = getOptionValue('config');
-if (configFilePath) {
-    const confFile = fs.readFileSync(configFilePath);
-    confJSON = JSON.parse(confFile);
-}
-
-if (confJSON === null) {
-    console.log("=================================================")
-    console.log("No config passed. Will take the default config.");
-    console.log("=================================================")
-
-    confJSON = defaultConfig;
-}
+const confJSON = initConfig(args);
 
 const REALM = confJSON.realmName;
 
@@ -86,7 +51,7 @@ kcAdminClient.auth({
 
         init();
     }).catch(() => console.log('Could not read realms...'));;
-}).catch(console.log);
+}).catch(() => console.log(`Could not authenticate to keycloak. Is it really running on ${confJSON.connectionConfig.baseUrl}?`));
 
 function createClient(client) {
     console.log(`Creating client "${client.clientId}"`);
