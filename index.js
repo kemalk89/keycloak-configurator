@@ -3,6 +3,7 @@
 const KcAdminClient = require('@keycloak/keycloak-admin-client');
 const prompt = require("prompt");
 const fs = require("fs");
+const defaultConfig = require("./default-config.json");
 
 const [, , ...args] = process.argv;
 
@@ -35,7 +36,11 @@ if (configFilePath) {
 }
 
 if (confJSON === null) {
-    throw 'No config passed';
+    console.log("=================================================")
+    console.log("No config passed. Will take the default config.");
+    console.log("=================================================")
+
+    confJSON = defaultConfig;
 }
 
 const REALM = confJSON.realmName;
@@ -52,12 +57,12 @@ kcAdminClient.auth({
 }).then(() => {
     console.log('Authenticated with admin user...');
 
-    console.log('Check if realm "app" is existing...');
+    console.log(`Check if realm "${REALM}" is existing...`);
 
     kcAdminClient.realms.find().then((realms) => {
-        const found = realms.filter(r => r.realm.toLowerCase() === 'app');
+        const found = realms.filter(r => r.realm.toLowerCase() === REALM);
         if (found.length >= 1) {
-            console.log('Realm "app" already exists! Nothing todo here.');
+            console.log(`Realm "${REALM}" already exists! Nothing todo here.`);
 
             prompt.start();
             prompt.get({
@@ -152,7 +157,7 @@ function createRole(role) {
 }
 
 function init() {
-    console.log('Realm "app" does not exist. Will create it.');
+    console.log(`Realm "${REALM}" does not exist. Will create it.`);
 
     kcAdminClient.realms.create({
         realm: REALM,
