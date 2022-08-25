@@ -1,6 +1,6 @@
 {
   "name": "keycloak-configurator",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Helps to configure locally running keycloak - not production",
   "main": "index.js",
   "author": "kemalk89",
